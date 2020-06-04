@@ -1,35 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/skyblue"
     android:orientation="vertical">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/skyblue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_marginLeft="93sp"
+       />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+<!--        android:fitsSystemWindows="true">-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:layout_marginLeft="19sp"
+            android:layout_marginTop="0sp"
+            android:layout_marginBottom="0sp"
+            android:text="提交日期:"
+            android:textSize="16sp"></TextView>
+        <EditText
+            android:id="@+id/editTextOfDatePicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="0sp"
+            android:ems="10"></EditText>
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="19sp"
+            android:layout_marginTop="40sp"
             android:layout_weight="1.3"
-            android:text="请选择姓名："
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40sp"/>
+            android:text="请选择线体"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_marginTop="40sp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="40sp"/>
+            android:layout_weight="1.5"
+            android:ems="10" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:text="请选择产品："
+                android:textSize="16sp"
+                android:layout_marginLeft="19sp"
+                android:layout_marginTop="40sp"/>
+            <Spinner
+                android:id="@+id/spinnerOfProductName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="40sp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19sp"
+            android:layout_marginTop="40sp"
+            android:layout_weight="1.3"
+            android:text="请选择工序："
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/editTextOfProcessName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.5"
+            android:ems="10" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19sp"
+            android:layout_marginTop="40sp"
+            android:layout_weight="1.3"
+            android:text="请填写数量："
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/editTextOfQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.5"
+            android:ems="10"
+            android:inputType="number"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnSubmitYields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:layout_marginTop="33sp"
+        android:textSize="16sp"
+        android:text="提交" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewToShowSubmittedInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10sp"
+        android:layout_marginLeft="19sp"
+        android:layout_marginTop="433sp"
+        android:text="@string/str_submitted_info"
+        android:textSize="13sp" />
 
 </LinearLayout>

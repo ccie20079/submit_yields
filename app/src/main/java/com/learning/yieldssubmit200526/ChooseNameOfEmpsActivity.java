@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ChooseNameOfEmpsActivity extends AppCompatActivity {
+import com.learning.utils.BaseActivity;
+
+public class ChooseNameOfEmpsActivity extends BaseActivity {
     private Button back_to_submit_Activity_btn = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

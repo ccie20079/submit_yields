@@ -1,12 +1,7 @@
 package com.learning.yieldssubmit200526;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,25 +10,23 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.learning.utils.BaseActivity;
 import com.learning.utils.DateHelper;
+import com.learning.utils.LogUtil;
 import com.learning.utils.MyApplication;
-
 import java.util.Calendar;
-
 public class SubmitYields extends BaseActivity {
-    private EditText editName = null;
+    private static final String TAG = "SubmitYields";
+    private static final int REQUEST_TO_GET_LINE_NAME = 1;
+    private static final int REQUEST_TO_GET_TEAM_NAME = 2;
+    private static final int REQUEST_TO_GET_EMP_NAME = 3;
     private EditText editTextOfDatePicker = null;
-    private Button btnSubmitYields = null;      //提交产量按钮。
-    private TextView textViewToShowSubmittedInfo = null;
-    private Toolbar toolbar = null;
-    private static final int REQUEST_CHOOSE_NAME_OF_THE_EMP = 1;
+    private EditText editTextOfLineName = null;
+    private EditText editTextOfTeamName = null;
+    private EditText editTextOfEmpName = null;
+    private Button btnSubmit = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,50 +36,24 @@ public class SubmitYields extends BaseActivity {
 //            getWindow().setStatusBarColor(Color.TRANSPARENT);
 //        }
         setContentView(R.layout.activity_submit_yields);
-        this.editName = (EditText)super.findViewById(R.id.editName);
-        //请求焦点
-        this.editName.requestFocus();
-        btnSubmitYields = (Button)super.findViewById(R.id.btnSubmitYields);
-        textViewToShowSubmittedInfo = (TextView)super.findViewById(R.id.textViewToShowSubmittedInfo);
-//        this.editName.setOnFocusChangeListener(new  editName_OnfocusChangeListenerImpl());
-        this.editName.setOnClickListener(new editName_OnClickListenerImpl());
+        //设定日期选择事件
+        this.editTextOfLineName = (EditText)super.findViewById(R.id.editTextOfLineName);
         this.editTextOfDatePicker = (EditText)findViewById(R.id.editTextOfDatePicker);
         this.editTextOfDatePicker.setOnTouchListener(new editTextOfDatePicker_onTouchListenerImpl());
         this.editTextOfDatePicker.setOnFocusChangeListener(new editTextOfDatePicker_onFocusChangeListenerImpl());
         this.editTextOfDatePicker.setText(DateHelper.getDateOfToday());
-        this.btnSubmitYields.setOnClickListener(new submitYields_onClickListenerImpl());
-        textViewToShowSubmittedInfo.setOnLongClickListener(new toShowSubmittedInfo_onLongClickListenerImpl());
-        toolbar = (Toolbar)super.findViewById(R.id.toolbar);
-//        int titleId = Resources.getSystem().getIdentifier("toolbar_title","id","android");
-//        TextView titleOfToolBar =(TextView)super.findViewById(titleId);
-//        titleOfToolBar.setGravity(Gravity.CENTER);
-        this.setSupportActionBar(toolbar);
+        this.editTextOfLineName.setOnClickListener(new editTextOfLineName_OnClickListenerImpl());
+        this.editTextOfTeamName = (EditText)super.findViewById(R.id.editTextOfTeamName);
+        editTextOfTeamName.setOnClickListener(new EditTextOfTeamName_onClickListenerImpl());
+        this.editTextOfEmpName = (EditText)super.findViewById(R.id.editTextOfEmpName);
+        editTextOfEmpName.setOnClickListener(new EditTextOfEmpName_OnClickListenerImpl());
+        this.btnSubmit = (Button)super.findViewById(R.id.btnSubmitYields);
+        lostFocus();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar,menu);
         return true;
-    }
-    /**
-     *  当点击到文本框时触发。
-     */
-    private class editName_OnfocusChangeListenerImpl implements View.OnFocusChangeListener {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if(hasFocus){
-                Toast.makeText(SubmitYields.this,"EditName: I has focus",Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    /**
-     * 当点击编辑框时，跳转到选择姓名页面
-     */
-    private class editName_OnClickListenerImpl implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Intent intentToChooseNameOfEmps = new Intent(SubmitYields.this,ChooseNameOfEmpsActivity.class);
-            startActivityForResult(intentToChooseNameOfEmps,REQUEST_CHOOSE_NAME_OF_THE_EMP);
-        }
     }
     /**
      * 返回选择的姓名
@@ -98,11 +65,29 @@ public class SubmitYields extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
-            case REQUEST_CHOOSE_NAME_OF_THE_EMP:
+                //获取线体
+            case REQUEST_TO_GET_LINE_NAME:
                 if(resultCode==RESULT_OK){
+                    String returnedLineName = data.getStringExtra("line_name");
+                    LogUtil.d(TAG,returnedLineName);
+                    this.editTextOfLineName.setText(returnedLineName);
                     break;
                 }
-
+            case REQUEST_TO_GET_TEAM_NAME:
+                if(resultCode==RESULT_OK){
+                    String returnedTeamName = data.getStringExtra("team_name");
+                    LogUtil.d(TAG,returnedTeamName);
+                    this.editTextOfTeamName.setText(returnedTeamName);
+                    break;
+                }
+                //处理员工姓名Activity返回的结果
+            case REQUEST_TO_GET_EMP_NAME:
+                if(resultCode==RESULT_OK){
+                    String returnedEmpName = data.getStringExtra("emp_name");
+                    LogUtil.d(TAG,returnedEmpName);
+                    this.editTextOfEmpName.setText(returnedEmpName);
+                    break;
+                }
             default:
                 break;
         }
@@ -133,6 +118,9 @@ public class SubmitYields extends BaseActivity {
         datePickerDialog.show();
     }
 
+    /**
+     * 日期选择监听器
+     */
     private class editTextOfDatePicker_onFocusChangeListenerImpl implements View.OnFocusChangeListener {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -143,26 +131,38 @@ public class SubmitYields extends BaseActivity {
     }
 
     /**
-     * 提交产量监听器
+     * 线体选择监听器
      */
-    private class submitYields_onClickListenerImpl implements View.OnClickListener {
+    private class editTextOfLineName_OnClickListenerImpl implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-//            Toast.makeText(MyApplication.getContext(),"产量已经提交！",Toast.LENGTH_SHORT).show();
-            Snackbar.make(v,"已经提交",Snackbar.LENGTH_SHORT).setAction("Undo", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(SubmitYields.this,"Data restored",Toast.LENGTH_SHORT).show();
-                }
-            }).show();
+            Intent intent = new Intent(MyApplication.getContext(),ShowAllLinesInfoOrderByCreatedTimeActivity.class);
+            startActivityForResult(intent,REQUEST_TO_GET_LINE_NAME);
+        }
+    }
+    private void lostFocus(){
+        this.btnSubmit.requestFocus();
+    }
+
+    /**
+     * 姓名选择监听器
+     */
+    private class EditTextOfTeamName_onClickListenerImpl implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MyApplication.getContext(),ShowAllTeamNameOrderByCreatedTimeActivity.class);
+            startActivityForResult(intent,REQUEST_TO_GET_TEAM_NAME);
         }
     }
 
-    private class toShowSubmittedInfo_onLongClickListenerImpl implements View.OnLongClickListener {
+    /**
+     * 转向员工姓名选择页面
+     */
+    private class EditTextOfEmpName_OnClickListenerImpl implements View.OnClickListener {
         @Override
-        public boolean onLongClick(View v) {
-            Toast.makeText(MyApplication.getContext(),"将转向今日提交详情",Toast.LENGTH_SHORT).show();
-            return false;
+        public void onClick(View v) {
+            Intent intent = new Intent(MyApplication.getContext(),ShowAllEmpNameOrderByCreatedTimeActivity.class);
+            startActivityForResult(intent,REQUEST_TO_GET_EMP_NAME);
         }
     }
 }

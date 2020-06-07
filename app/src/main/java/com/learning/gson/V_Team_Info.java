@@ -6,16 +6,18 @@ package com.learning.gson;
  * date:           2020/6/4
  * email:          ccie20079@126.com
  */
-public class V_Line_Info {
-    public String getLine_name() {
-        return line_name;
+public class V_Team_Info {
+
+
+    public String getTeam_name() {
+        return team_name;
     }
 
-    public void setLine_name(String line_name) {
-        this.line_name = line_name;
+    public void setTeam_name(String team_name) {
+        this.team_name = team_name;
     }
 
-    private String line_name;
+    private String team_name;
 
     public String getMonitor() {
         return monitor;

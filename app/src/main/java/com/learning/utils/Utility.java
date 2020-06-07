@@ -4,12 +4,15 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.learning.gson.V_Emp_Name;
 import com.learning.gson.V_Line_Info;
+import com.learning.gson.V_Team_Info;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.GenericSignatureFormatError;
 import java.util.List;
 
 public class Utility {
@@ -102,5 +105,17 @@ public class Utility {
         Gson gson = new Gson();
         List<V_Line_Info> v_line_infoList =gson.fromJson(jsonData,new TypeToken<List<V_Line_Info>>(){}.getType());
         return v_line_infoList;
+    }
+    public static List<V_Team_Info> getAllTeamsInfoOrderByCreatedTime(String jsonData){
+        Gson gson = new Gson();
+        //有可能会返回空值
+        List<V_Team_Info> v_team_infoList =gson.fromJson(jsonData,new TypeToken<List<V_Team_Info>>(){}.getType());
+        return v_team_infoList;
+    }
+
+    public static List<V_Emp_Name> getAllEmpInfosOfYesterdayOrderByCreatedTimeDesc(String jsonData) {
+       Gson gson = new Gson();
+       List<V_Emp_Name> v_emp_nameList = gson.fromJson(jsonData,new TypeToken<List<V_Emp_Name>>(){}.getType());
+       return v_emp_nameList;
     }
 }

@@ -38,7 +38,7 @@ import okhttp3.Response;
 
 public class ShowAllLinesInfoOrderByCreatedTimeActivity extends BaseActivity {
     SimpleAdapter simpleAdapter = null;
-    List<V_Line_Info> line_info_list  = null;
+    List<V_Line_Info> line_info_list ;
     private ListView listView = null;
     private String result = null;
     @Override

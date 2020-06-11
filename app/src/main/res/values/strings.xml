@@ -2,7 +2,10 @@
     <string name="app_name">产量提交</string>
     <string name="str_submitted_info">西服 戗驳领 99  20-05-27 16:26\n\n裤子 裤脚 199   20-05-27 16:26</string>
     <string name="title_of_toolbar_submitYields">依线体报工</string>
+    <string name="urlOfGetAllProductInfosRecent">http://192.168.1.113/Show_Products_Cost/GetAllProductInfosRecentAction!getAllProductInfosRecentOrderByCreatedTimeDesc.action</string>
     <string name="urlOfGetAllLineInfos">http://192.168.1.113/Show_Products_Cost/GetAllLineInfosAction!getAllLinesOrderByCreatedTimeDesc.action</string>
     <string name="urlOfGetAllTeamInfos">http://192.168.1.113/Show_Products_Cost/GetAllTeamInfosAction!getAllTeamsOrderByCreatedTimeDesc.action</string>
-    <string name="urlOfGetAllEmpInfosOfYesterday">http://192.168.1.113/Show_Products_Cost/GetAllEmpInfosOfYesterdayAction!getAllEmpInfosOrderByCreatedTimeDesc.action</string>
+    <string name="urlOfGetAllEmpInfosWithPN_LineName">http://192.168.1.113/Show_Products_Cost/GetAllEmpInfosRecentAction!getAllEmpInfosWithPN_LineName.action</string>
+    <string name = "urlOfGetAllEmpInfosWithPN">http://192.168.1.113/Show_Products_Cost/GetAllEmpInfosRecentAction!getAllEmpInfosWithPN.action</string>
+    <string name = "urlOfGetAllEmpInfosL3M">http://192.168.1.113/Show_Products_Cost/GetAllEmpInfosRecentAction!getAllEmpInfosL3MOrderByInsertedTimeASC.action</string>
 </resources>

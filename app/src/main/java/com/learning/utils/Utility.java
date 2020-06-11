@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.learning.gson.V_Emp_Name;
 import com.learning.gson.V_Line_Info;
+import com.learning.gson.V_Products_Info_Recent;
 import com.learning.gson.V_Team_Info;
 
 import org.json.JSONArray;
@@ -113,9 +114,14 @@ public class Utility {
         return v_team_infoList;
     }
 
-    public static List<V_Emp_Name> getAllEmpInfosOfYesterdayOrderByCreatedTimeDesc(String jsonData) {
+    public static List<V_Emp_Name> getAllEmpInfosRecentByCreatedTimeDesc(String jsonData) {
        Gson gson = new Gson();
        List<V_Emp_Name> v_emp_nameList = gson.fromJson(jsonData,new TypeToken<List<V_Emp_Name>>(){}.getType());
        return v_emp_nameList;
+    }
+    public static List<V_Products_Info_Recent> getAllProductInfosRecentOrderByCreatedTimeDesc(String jsonData) {
+        Gson gson = new Gson();
+        List<V_Products_Info_Recent> v_products_info_recentList = gson.fromJson(jsonData,new TypeToken<List<V_Products_Info_Recent>>(){}.getType());
+        return v_products_info_recentList;
     }
 }

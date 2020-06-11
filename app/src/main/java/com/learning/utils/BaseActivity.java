@@ -20,7 +20,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState, persistentState);
         LogUtil.d(TAG,getClass().getSimpleName());      //查看当前是哪个活动
         ActivityCollector.addActivity(this);
-    }
+}
 
     @Override
     protected void onDestroy() {
